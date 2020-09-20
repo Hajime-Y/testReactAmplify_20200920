@@ -10,6 +10,15 @@ import { onCreateTodo } from './graphql/subscriptions';
 import awsconfig from './aws-exports';
 import './App.css';
 
+//material ui 追加 20200920
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
 API.configure(awsconfig);
 PubSub.configure(awsconfig);
 
@@ -37,8 +46,25 @@ const reducer = (state, action) => {
   }
 };
 
+
+//material ui 追加 20200920
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  //material ui 追加 20200920
+  const classes = useStyles();
 
   useEffect(() => {
     async function getData() {
@@ -59,6 +85,17 @@ function App() {
 
   return (
     <div className="App">
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            News
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
       <button onClick={createNewTodo}>Add Todo</button>
       <div>Todo-react-amplify-20200920</div>
       <div>
