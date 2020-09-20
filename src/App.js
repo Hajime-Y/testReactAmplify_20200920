@@ -60,6 +60,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={createNewTodo}>Add Todo</button>
+      <div>Todo-react-amplify-20200920</div>
       <div>
         {state.todos.length > 0 ? 
           state.todos.map((todo) => <p key={todo.id}>{todo.name} : {todo.description}</p>) :
